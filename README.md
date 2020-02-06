@@ -17,7 +17,7 @@ module "bucket_example_slim" {
   google_project = var.google_project
   google_region  = var.google_region
 
-  name = "bucket-example-slim" // Appends environment to the name
+  name = "example-slim" // Bulder-environment is prefixed to bucket name
 }
 ```
 
@@ -34,7 +34,7 @@ module "bucket_example" {
   google_project = var.google_project
   google_region  = var.google_region
 
-  name = "bucket-example"           // Appends environment to the name
+  name = "example-slim"             // Bulder-environment is prefixed to bucket name
 
   storage_class = "STANDARD"        // Can be omitted, defaults to REGIONAL
   backup_retention = [604800]       // Can be omitted, number in seconds (7 days in example)
