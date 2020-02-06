@@ -1,5 +1,5 @@
 resource "google_storage_bucket" "bucket" {
-  name          = "${var.name}-${var.environment}"
+  name          = "bulder-${var.environment}-${var.name}"
   project       = var.google_project
   location      = local.location
   storage_class = var.storage_class
