@@ -5,7 +5,7 @@ resource "google_storage_bucket" "bucket" {
   storage_class = var.storage_class
 
   dynamic "retention_policy" {
-    for_each = var.backup_retention
+    for_each = var.object_retention
     content {
       retention_period = retention_policy.value
     }

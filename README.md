@@ -37,7 +37,7 @@ module "bucket_example" {
   name = "example-slim"             // Bulder-environment is prefixed to bucket name
 
   storage_class = "STANDARD"        // Can be omitted, defaults to REGIONAL
-  backup_retention = [604800]       // Can be omitted, number in seconds (7 days in example)
+  object_retention = [604800]       // Can be omitted, How long to keep objects before they can be modified in seconds
 
   archive_rule = {                  // Can be omitted, move files to another storage_class after x days
     archive_after_7_days = {

@@ -17,7 +17,7 @@ variable "storage_class" {
   default = "REGIONAL"
 }
 
-variable "backup_retention" {
+variable "object_retention" {
   type    = list(number)
   default = []
 }
