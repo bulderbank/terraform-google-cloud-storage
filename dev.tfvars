@@ -7,14 +7,14 @@ google_region  = "europe-north1"
 
 name = "example-slim"
 
-storage_class = "STANDARD"
+storage_class    = "STANDARD"
 object_retention = [604800]
 
 archive_rule = {
   archive_after_7_days = {
-    age        = 7
-    with_state = "LIVE"
-    target_class = ["STANDARD"]
+    age           = 7
+    with_state    = "LIVE"
+    target_class  = ["STANDARD"]
     archive_class = "COLDLINE"
   }
 }
