@@ -17,6 +17,11 @@ variable "storage_class" {
   default = "REGIONAL"
 }
 
+variable "versioning" {
+  type    = bool
+  default = false
+}
+
 variable "object_retention" {
   type    = list(number)
   default = []

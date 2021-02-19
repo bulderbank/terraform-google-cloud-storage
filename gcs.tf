@@ -4,6 +4,10 @@ resource "google_storage_bucket" "bucket" {
   location      = local.location
   storage_class = var.storage_class
 
+  versioning {
+    enabled = var.versioning
+  }
+
   dynamic "retention_policy" {
     for_each = var.object_retention
     content {

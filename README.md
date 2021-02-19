@@ -37,6 +37,7 @@ module "bucket_example" {
   name = "example-slim"                     // Bulder-environment is prefixed to bucket name
 
   storage_class = "STANDARD"                // Can be omitted, defaults to REGIONAL
+  versioning = true                         // Can be omitted, will create new versions instead of overwriting objects in bucket
   object_retention = [604800]               // Can be omitted, How long to keep objects before they can be modified in seconds
 
   backup_enabled = true                     // Enables nightly backup at 03:00
