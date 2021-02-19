@@ -42,6 +42,26 @@ variable "iam_write_members" {
   default = []
 }
 
+variable "backup_enabled" {
+  type    = bool
+  default = false
+}
+
+variable "backup_pause" {
+  type    = bool
+  default = false
+}
+
+variable "backup_location" {
+  type    = string
+  default = ""
+}
+
+variable "backup_overwrite_existing" {
+  type    = bool
+  default = false
+}
+
 locals {
   location = var.google_region
   labels = {
