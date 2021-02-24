@@ -1,3 +1,15 @@
+data "google_storage_transfer_project_service_account" "default" {
+  project = var.google_project
+}
+
+resource "google_storage_bucket_iam_member" "backup_viewer" {
+  count = var.backup_enabled ? 1 : 0
+
+  bucket     = google_storage_bucket.bucket.name
+  role       = "roles/storage.objectViewer"
+  member     = "serviceAccount:${data.google_storage_transfer_project_service_account.default.email}"
+}
+
 resource "google_storage_transfer_job" "backup" {
   count = var.backup_enabled ? 1 : 0
 
@@ -32,4 +44,9 @@ resource "google_storage_transfer_job" "backup" {
   }
 
   depends_on = [google_storage_bucket.bucket]
+}
+
+output "backup_sa_email" {
+  value       = data.google_storage_transfer_project_service_account.default.email
+  description = "Default service account for GCS transfer service"
 }
