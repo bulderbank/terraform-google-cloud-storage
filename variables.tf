@@ -1,9 +1,5 @@
 variable "environment" {}
 
-variable "created_by" {}
-
-variable "created_on" {}
-
 variable "google_project" {}
 
 variable "google_region" {}
@@ -71,8 +67,6 @@ locals {
   location = var.google_region
   labels = {
     created-with = "terraform"
-    created-by   = var.created_by
-    created-on   = var.created_on
     environment  = var.environment
   }
 }

@@ -10,14 +10,11 @@ Made for Terraform 0.12.x
 module "bucket_example_slim" {
   source = "github.com/bulderbank/terraform-google-cloud-storage"
 
-  created_on = "2020-01-06"
-  created_by = "fredrick-myrvoll"
-
   environment    = var.environment
   google_project = var.google_project
   google_region  = var.google_region
 
-  name = "example-slim" // Bulder-environment is prefixed to bucket name
+  name = "bulder-${var.environment}-example-slim"
 }
 ```
 
@@ -27,14 +24,11 @@ module "bucket_example_slim" {
 module "bucket_example" {
   source = "github.com/bulderbank/terraform-google-cloud-storage"
 
-  created_on = "2020-01-06"
-  created_by = "fredrick-myrvoll"
-
   environment    = var.environment
   google_project = var.google_project
   google_region  = var.google_region
 
-  name = "example-slim"                     // Bulder-environment is prefixed to bucket name
+  name = "bulder-${var.environment}-example-slim"
 
   storage_class = "STANDARD"                // Can be omitted, defaults to REGIONAL
   versioning = true                         // Can be omitted, will create new versions instead of overwriting objects in bucket

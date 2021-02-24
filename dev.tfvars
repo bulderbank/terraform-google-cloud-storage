@@ -1,6 +1,3 @@
-created_on = "2020-01-06"
-created_by = "fredrick-myrvoll"
-
 environment    = "dev"
 google_project = "module-dev"
 google_region  = "europe-north1"

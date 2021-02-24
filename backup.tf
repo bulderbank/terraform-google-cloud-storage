@@ -9,7 +9,7 @@ resource "google_storage_bucket_iam_member" "backup_viewer" {
 resource "google_storage_transfer_job" "backup" {
   count = var.environment == "prod" && var.backup_enabled ? 1 : 0
 
-  description = "Nightly backup for bulder-${var.environment}-${var.name}"
+  description = "Nightly backup for ${var.name}"
   project     = var.google_project
   status      = var.backup_pause
 
