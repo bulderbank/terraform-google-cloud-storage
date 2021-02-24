@@ -7,6 +7,11 @@ google_region  = "europe-north1"
 
 name = "example-slim"
 
+backup_enabled            = true
+backup_pause              = "ENABLED"
+backup_sa_email           = "yolo@wan.kanobi"
+backup_overwrite_existing = true
+
 storage_class    = "STANDARD"
 object_retention = [604800]
 

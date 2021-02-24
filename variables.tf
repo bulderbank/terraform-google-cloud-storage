@@ -52,14 +52,14 @@ variable "backup_enabled" {
   default = false
 }
 
-variable "backup_pause" {
-  type    = bool
-  default = false
-}
-
-variable "backup_location" {
+variable "backup_sa_email" {
   type    = string
   default = ""
+}
+
+variable "backup_pause" {
+  type    = string
+  default = "ENABLED"
 }
 
 variable "backup_overwrite_existing" {

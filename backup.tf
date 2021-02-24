@@ -1,25 +1,25 @@
-data "google_storage_transfer_project_service_account" "default" {
-  project = var.google_project
-}
-
 resource "google_storage_bucket_iam_member" "backup_viewer" {
-  count = !var.environment == "test" && var.backup_enabled ? 1 : 0
+  count = var.environment == "prod" && var.backup_enabled ? 1 : 0
 
   bucket = google_storage_bucket.bucket.name
   role   = "roles/storage.objectViewer"
-  member = "serviceAccount:${data.google_storage_transfer_project_service_account.default.email}"
+  member = "serviceAccount:${var.backup_sa_email}"
 }
 
 resource "google_storage_transfer_job" "backup" {
-  count = !var.environment == "test" && var.backup_enabled ? 1 : 0
+  count = var.environment == "prod" && var.backup_enabled ? 1 : 0
 
   description = "Nightly backup for bulder-${var.environment}-${var.name}"
   project     = var.google_project
   status      = var.backup_pause
 
   transfer_spec {
+    gcs_data_source {
+      bucket_name = google_storage_bucket.bucket.name
+    }
+
     gcs_data_sink {
-      bucket_name = var.backup_location
+      bucket_name = "backup-${google_storage_bucket.bucket.name}"
     }
 
     transfer_options {
@@ -44,9 +44,4 @@ resource "google_storage_transfer_job" "backup" {
   }
 
   depends_on = [google_storage_bucket.bucket]
-}
-
-output "backup_sa_email" {
-  value       = data.google_storage_transfer_project_service_account.default.email
-  description = "Default service account for GCS transfer service"
 }

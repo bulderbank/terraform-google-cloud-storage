@@ -41,8 +41,8 @@ module "bucket_example" {
   object_retention = [604800]               // Can be omitted, How long to keep objects before they can be modified in seconds
 
   backup_enabled = true                     // Enables nightly backup at 03:00
-  backup_pause = false                      // Temporary pause the backup job
-  backup_location = "backup-example-slim"   // Remote bucket to store backup
+  backup_pause = "DISABLE"                  // Temporary pause the backup job
+  backup_sa_email = "example@sa.com"        // Default service account for GCS transfer jobs
   backup_overwrite_existing = true          // Replace objects in backup bucket
 
   archive_rule = {                          // Can be omitted, move files to another storage_class after x days
