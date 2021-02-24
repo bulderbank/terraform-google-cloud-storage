@@ -3,15 +3,15 @@ data "google_storage_transfer_project_service_account" "default" {
 }
 
 resource "google_storage_bucket_iam_member" "backup_viewer" {
-  count = var.backup_enabled ? 1 : 0
+  count = !var.environment == "test" && var.backup_enabled ? 1 : 0
 
-  bucket     = google_storage_bucket.bucket.name
-  role       = "roles/storage.objectViewer"
-  member     = "serviceAccount:${data.google_storage_transfer_project_service_account.default.email}"
+  bucket = google_storage_bucket.bucket.name
+  role   = "roles/storage.objectViewer"
+  member = "serviceAccount:${data.google_storage_transfer_project_service_account.default.email}"
 }
 
 resource "google_storage_transfer_job" "backup" {
-  count = var.backup_enabled ? 1 : 0
+  count = !var.environment == "test" && var.backup_enabled ? 1 : 0
 
   description = "Nightly backup for bulder-${var.environment}-${var.name}"
   project     = var.google_project
