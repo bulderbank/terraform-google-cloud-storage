@@ -18,11 +18,21 @@ resource "google_storage_bucket_iam_member" "iam_legacy_bucket_reader" {
   depends_on = [google_storage_bucket.bucket]
 }
 
-resource "google_storage_bucket_iam_member" "iam_write_members" {
+resource "google_storage_bucket_iam_member" "iam_object_creator" {
   for_each = toset(var.iam_write_members)
 
   bucket = google_storage_bucket.bucket.name
   role   = "roles/storage.objectCreator"
+  member = each.key
+
+  depends_on = [google_storage_bucket.bucket]
+}
+
+resource "google_storage_bucket_iam_member" "iam_legacy_bucket_writer" {
+  for_each = toset(var.iam_write_members)
+
+  bucket = google_storage_bucket.bucket.name
+  role   = "roles/storage.legacyBucketWriter"
   member = each.key
 
   depends_on = [google_storage_bucket.bucket]
